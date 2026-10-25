@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <title>NOIR — минималистичная одежда.</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="header">
+    <h1 class="logo">NOIR</h1>
+    <button id="cartBtn" class="cart-btn" aria-label="Открыть корзину">
+      Корзина <span id="cartCount" class="cart-count">0</span>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="hero-sub">Новая коллекция</p>
+      <h2 class="hero-title">Просто. Чисто.<br>Каждый день.</h2>
+    </section>
+
+    <nav id="categories" class="chips" aria-label="Категории"></nav>
+
+    <section id="products" class="grid"></section>
+    <p id="status" class="status">Загрузка…</p>
+  </main>
+
+  <footer class="footer">© NOIR</footer>
+
+  <div id="overlay" class="overlay"></div>
+
+  <!-- Карточка товара -->
+  <aside id="productSheet" class="sheet" aria-hidden="true">
+    <button class="sheet-close" data-close aria-label="Закрыть">×</button>
+    <div id="productContent"></div>
+  </aside>
+
+  <!-- Корзина -->
+  <aside id="cartSheet" class="sheet" aria-hidden="true">
+    <button class="sheet-close" data-close aria-label="Закрыть">×</button>
+    <h3 class="sheet-title">Корзина</h3>
+    <div id="cartItems"></div>
+    <div id="cartFooter">
+      <div class="total-row">
+        <span>Итого</span>
+        <strong id="cartTotal">0 ₽</strong>
+      </div>
+      <form id="orderForm" class="form">
+        <input name="name" type="text" placeholder="Имя" required maxlength="100" autocomplete="name">
+        <input name="phone" type="tel" placeholder="Телефон" required maxlength="30" autocomplete="tel">
+        <input name="address" type="text" placeholder="Адрес доставки" required maxlength="255" autocomplete="street-address">
+        <button id="orderBtn" class="btn" type="submit">Оформить заказ</button>
+      </form>
+    </div>
+  </aside>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

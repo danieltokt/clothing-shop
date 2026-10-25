@@ -1,0 +1,151 @@
+:root {
+  --bg: #ffffff;
+  --text: #111111;
+  --muted: #8a8a8a;
+  --line: #e8e8e8;
+  --soft: #f5f5f5;
+  --radius: 4px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.4;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+body.no-scroll { overflow: hidden; }
+
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+input { font: inherit; }
+
+/* Header */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.logo { font-size: 18px; font-weight: 600; letter-spacing: 0.3em; }
+.cart-btn { font-size: 14px; display: flex; align-items: center; gap: 6px; }
+.cart-count {
+  min-width: 20px; height: 20px; padding: 0 6px;
+  border-radius: 10px; background: var(--text); color: #fff;
+  font-size: 12px; display: inline-flex; align-items: center; justify-content: center;
+}
+
+/* Hero */
+.hero { padding: 40px 16px 24px; }
+.hero-sub { font-size: 12px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--muted); margin-bottom: 10px; }
+.hero-title { font-size: 30px; font-weight: 500; line-height: 1.15; letter-spacing: -0.01em; }
+
+/* Categories */
+.chips {
+  display: flex; gap: 8px; overflow-x: auto;
+  padding: 8px 16px 16px; scrollbar-width: none;
+}
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: none; padding: 8px 16px; font-size: 14px;
+  border: 1px solid var(--line); border-radius: 100px; transition: all 0.2s;
+}
+.chip.active { background: var(--text); color: #fff; border-color: var(--text); }
+
+/* Product grid */
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px 12px; padding: 0 16px; }
+.card { cursor: pointer; }
+.card img {
+  width: 100%; aspect-ratio: 3 / 4; object-fit: cover;
+  background: var(--soft); display: block; border-radius: var(--radius);
+}
+.card-name { font-size: 14px; margin-top: 8px; }
+.card-price { font-size: 14px; color: var(--muted); margin-top: 2px; }
+
+.status { text-align: center; color: var(--muted); font-size: 14px; padding: 32px 16px; }
+.footer { text-align: center; color: var(--muted); font-size: 12px; padding: 32px 16px; letter-spacing: 0.2em; }
+
+/* Overlay + sheets */
+.overlay {
+  position: fixed; inset: 0; background: rgba(0, 0, 0, 0.4);
+  opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 20;
+}
+.overlay.show { opacity: 1; pointer-events: auto; }
+
+.sheet {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+  max-height: 92vh; overflow-y: auto;
+  background: var(--bg); border-radius: 16px 16px 0 0;
+  padding: 20px 16px calc(24px + env(safe-area-inset-bottom));
+  transform: translateY(100%); transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.sheet.open { transform: translateY(0); }
+.sheet-close { position: absolute; top: 10px; right: 14px; font-size: 30px; line-height: 1; color: var(--muted); z-index: 1; }
+.sheet-title { font-size: 18px; font-weight: 500; margin-bottom: 16px; }
+
+/* Product sheet */
+.p-img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: var(--radius); background: var(--soft); display: block; margin-bottom: 16px; }
+.p-name { font-size: 20px; font-weight: 500; }
+.p-price { font-size: 18px; margin: 4px 0 12px; }
+.p-desc { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+.p-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 8px; }
+.sizes { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.size {
+  min-width: 48px; padding: 10px 14px; font-size: 14px;
+  border: 1px solid var(--line); border-radius: var(--radius); text-align: center;
+}
+.size.active { background: var(--text); color: #fff; border-color: var(--text); }
+
+.btn {
+  width: 100%; padding: 16px; background: var(--text); color: #fff;
+  font-size: 15px; border-radius: var(--radius); letter-spacing: 0.02em;
+}
+.btn:disabled { opacity: 0.5; }
+
+/* Cart */
+.cart-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.cart-item img { width: 64px; height: 85px; object-fit: cover; border-radius: var(--radius); background: var(--soft); }
+.ci-info { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+.ci-name { font-size: 14px; }
+.ci-meta { font-size: 13px; color: var(--muted); }
+.qty { display: flex; align-items: center; gap: 12px; }
+.qty button { width: 28px; height: 28px; border: 1px solid var(--line); border-radius: 50%; font-size: 16px; }
+.ci-price { font-size: 14px; align-self: flex-end; }
+.empty { text-align: center; color: var(--muted); padding: 40px 0; font-size: 14px; }
+
+.total-row { display: flex; justify-content: space-between; font-size: 16px; padding: 16px 0; }
+.form { display: flex; flex-direction: column; gap: 10px; }
+.form input {
+  padding: 14px; font-size: 16px; /* 16px — чтобы iOS не зумил */
+  border: 1px solid var(--line); border-radius: var(--radius); outline: none; background: #fff;
+}
+.form input:focus { border-color: var(--text); }
+.form .btn { margin-top: 6px; }
+
+/* Toast */
+.toast {
+  position: fixed; left: 50%; bottom: 24px; z-index: 40;
+  transform: translate(-50%, 20px); opacity: 0; pointer-events: none;
+  background: var(--text); color: #fff; padding: 12px 20px;
+  border-radius: 100px; font-size: 14px; transition: all 0.3s; max-width: 90%; text-align: center;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* Планшеты / десктоп */
+@media (min-width: 700px) {
+  .grid { grid-template-columns: repeat(3, 1fr); max-width: 1000px; margin: 0 auto; gap: 28px 20px; }
+  .hero, .chips { max-width: 1000px; margin: 0 auto; }
+  .hero-title { font-size: 44px; }
+  .sheet { left: 50%; right: auto; width: 480px; transform: translate(-50%, 100%); }
+  .sheet.open { transform: translate(-50%, 0); }
+}
